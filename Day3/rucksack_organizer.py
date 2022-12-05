@@ -1,6 +1,10 @@
 import string
+import time
+start_time = time.time()
 def main():
     organizeRucksack()
+    print("Process finished --- %s seconds ---" % (time.time() - start_time))
+
 def findCommon(string1, string2):
     match = False
     while match == False:

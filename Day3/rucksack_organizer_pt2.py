@@ -1,13 +1,14 @@
 import string
 def main():
     organizeRucksack()
-def findCommon(string1, string2):
+def findCommon(string1, string2, string3):
     match = False
     while match == False:
-        for letters in string1:
+        for letters in string1.strip('\n'):
             if letters in string2:
-                common = letters
-                match = True
+                if letters in string3:
+                    common = letters
+                    match = True
     return common
 def convertPriority(itemtype):
     if itemtype.isupper():
@@ -17,13 +18,14 @@ def convertPriority(itemtype):
     return itemValue
 def organizeRucksack():
     sum = 0
-    with open('./inputs.txt') as file:
+    i = 0
+    with open('/Users/thomasreed/repos/AdventOfCode2022/Day3/inputs.txt') as file:
         sacks = file.readlines()
-    for sack in sacks:
-        linelength = len(sack)
-        firstCompartment = sack[0:int((len(sack)/2))]
-        secondCompartment = (sack[int((len(sack)/2)):]).strip('/n')
-        common = (findCommon(firstCompartment,secondCompartment))
+    while (i+3) <= len(sacks):
+        slice = sacks[i:(i+3)]
+        common = (findCommon(slice[0], slice[1], slice[2]))
+        print(common)
         sum+=convertPriority(common)
+        i  += 3
     print(sum)
 main()
